@@ -14,3 +14,4 @@ def create_app():
         db.create_all()  # Criar tabelas, se ainda não existirem
     
     return app
+

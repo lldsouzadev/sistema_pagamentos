@@ -14,17 +14,18 @@ Este é um sistema básico de pagamentos inspirado no PicPay, desenvolvido com *
 
 Abaixo está a estrutura básica de diretórios do projeto:
 
-sistema_pagamentos/
-├── app/
-│   ├── __init__.py         # Inicializador do aplicativo
-│   ├── models.py           # Modelos do banco de dados
-│   ├── routes.py           # Definição de rotas da API
-│   ├── services.py         # Lógica de serviço para operações de pagamento
-│   └── utils.py            # Funções utilitárias
-├── venv/                   # Ambiente virtual (já criado)
-├── requirements.txt        # Dependências do projeto
-├── .gitignore              # Arquivos a serem ignorados pelo Git
-└── README.md
+    ```bash
+    sistema_pagamentos/
+    ├── app/
+    │   ├── __init__.py         # Inicializador do aplicativo
+    │   ├── models.py           # Modelos do banco de dados
+    │   ├── routes.py           # Definição de rotas da API
+    │   ├── services.py         # Lógica de serviço para operações de pagamento
+    │   └── utils.py            # Funções utilitárias
+    ├── venv/                   # Ambiente virtual (já criado)
+    ├── requirements.txt        # Dependências do projeto
+    ├── .gitignore              # Arquivos a serem ignorados pelo Git
+    └── README.md
 
 
 ## Instalação e Configuração

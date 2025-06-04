@@ -62,13 +62,15 @@ def process_transaction(payer_id_str, payee_id_str, amount_str):
         return {"error": "Transaction amount must be positive."}, 400
 
     # 1. Verify Payer
+    # Usar db.session.get() para buscar por ID primário é mais direto se já temos o UUID.
+    # No entanto, precisamos filtrar também por user_type, então filter_by é apropriado aqui.
     payer = User.query.filter_by(id=payer_id, user_type=UserType.COMMON).first()
     if not payer:
         return {"error": "Payer not found or is not a common user."}, 404
 
     # 2. Verify Payee
-    payee_user = User.query.get(payee_id)
-    payee_merchant = Merchant.query.get(payee_id)
+    payee_user = db.session.get(User, payee_id) # Usando db.session.get
+    payee_merchant = db.session.get(Merchant, payee_id) # Usando db.session.get
 
     if not payee_user and not payee_merchant:
         return {"error": "Payee not found."}, 404
@@ -96,6 +98,10 @@ def process_transaction(payer_id_str, payee_id_str, amount_str):
     try:
         payer.balance -= amount
         payee.balance += amount
+
+        # Adicionar payer e payee à sessão para garantir que as alterações de saldo sejam salvas.
+        db.session.add(payer)
+        db.session.add(payee)
 
         transaction = Transaction(
             payer_id=payer.id,

@@ -122,12 +122,12 @@ def get_user_balance(user_id):
             return jsonify({"error": "Invalid user ID format."}), 400
 
         # Try to find in User table
-        user = User.query.get(val_uuid)
+        user = db.session.get(User, val_uuid) # Usando db.session.get
         if user:
             return jsonify({"user_id": str(user.id), "balance": str(user.balance), "user_type": "common"}), 200
 
         # Try to find in Merchant table
-        merchant = Merchant.query.get(val_uuid)
+        merchant = db.session.get(Merchant, val_uuid) # Usando db.session.get
         if merchant:
             return jsonify({"user_id": str(merchant.id), "balance": str(merchant.balance), "user_type": "merchant"}), 200
 
